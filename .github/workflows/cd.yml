@@ -1,0 +1,32 @@
+name: Auto Pull on Server
+
+on:
+  push:
+    branches:
+      - pram
+  pull_request:
+    branches:
+      - pram
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.PRIVATE_KEY }}
+
+      - name: SSH to VPS and pull changes
+        uses: appleboy/ssh-action@master
+        with:
+          host: SSHHOST
+          username: SSHNAME
+          key: ${{ secrets.PRIVATE_KEY }}
+          script: |
+            cd /path/to/your/repository
+            git pull origin pram
