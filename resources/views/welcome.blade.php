@@ -21,7 +21,7 @@
     </div>
     <script>
         function button(){
-            alert("Ala bloon")
+            alert("hello")
         }
     </script>
 </body>
