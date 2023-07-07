@@ -24,8 +24,8 @@ jobs:
       - name: SSH to VPS and pull changes
         uses: appleboy/ssh-action@master
         with:
-          host: SSHHOST
-          username: SSHNAME
+          host: ${{ secrets.SSHHOST }}
+          username: ${{ secrets.SSHNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
             cd /var/ww/html/laravel/hello-world
