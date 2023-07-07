@@ -27,6 +27,7 @@ jobs:
           host: ${{ secrets.SSHHOST }}
           username: ${{ secrets.SSHNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
+          port: 22
           script: |
             cd /var/ww/html/laravel/hello-world
             git pull origin pram
