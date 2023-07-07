@@ -1,6 +1,8 @@
 name: Laravel
 
 on:
+  push:
+    branches : ["pram"]
   pull_request:
     branches: [ "pram" ]
 

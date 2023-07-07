@@ -28,5 +28,5 @@ jobs:
           username: SSHNAME
           key: ${{ secrets.PRIVATE_KEY }}
           script: |
-            cd /path/to/your/repository
+            cd /var/ww/html/laravel/hello-world
             git pull origin pram
