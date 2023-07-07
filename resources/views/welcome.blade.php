@@ -1,1 +1,1 @@
-<h1>Ala Bloon^^</h1>
+<h1 style="text-align: center">Ala Bloon^^</h1>
