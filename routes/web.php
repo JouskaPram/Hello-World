@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::get("/chatpage",[ChatController::class,"index"])->name('chatting.view');
 Route::get("/chat",[ChatController::class,"getMsg"])->name('chat.view');
-Route::post("/chat",[ChatController::class,"sendPesan"])->name('chat.view');
+Route::post("/chat",[ChatController::class,"sendPesan"])->name('chat.post');
 Route::get("/user",[ChatController::class,"getUserLogin"]);
 
 require __DIR__.'/auth.php';
