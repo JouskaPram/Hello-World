@@ -25,9 +25,10 @@ class ChatController extends Controller
     {
     $user = Auth::user()->getAuthIdentifier();
       $pesan = Pesan::create([
+           "user_id"=>$user,
         "pesan"=>request("pesan"),
-        "user_id"=>1
       ]);
+      return redirect()->back();
       
 
 }

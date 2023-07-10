@@ -26,3 +26,4 @@ jobs:
           script: |
             cd /var/www/html/laravel/hello-world
             git pull origin pram
+            npm run build

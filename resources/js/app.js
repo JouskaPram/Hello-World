@@ -21,3 +21,8 @@ createInertiaApp({
         color: '#4B5563',
     },
 });
+const getUser = async () => {
+    const res = await axios.get("/user")
+    // console.log(res.data)
+    user.value = res.data;
+}

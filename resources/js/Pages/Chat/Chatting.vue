@@ -7,6 +7,7 @@
         </ul>
         <form @submit.prevent="addMsg">
             <input type="text" v-model="pesan">
+
             <button type="submit">Submit</button>
         </form>
     </div>
@@ -19,7 +20,6 @@ import { ref, onMounted } from "vue";
 const datas = ref([]);
 const pesan = ref("");
 const user = ref([])
-
 onMounted(() => {
     getMsg();
     getUser()
@@ -30,17 +30,17 @@ const getMsg = async () => {
     datas.value = res.data;
 };
 
-const addMsg = (data) => {
-    datas.value.push(data)
-    console.log(data)
-    const res = axios.post("/chat", data);
+const addMsg = () => {
+
+    const res = axios.post("/chat", {
+        "pesan": pesan.value,
+
+
+    });
     pesan.value = ""; // Clear the input field
+    getMsg()
 };
-const getUser = async () => {
-    const res = await axios.get("/user")
-    // console.log(res.data)
-    user.value = res.data;
-}
+
 </script>
 
 <style lang="scss" scoped></style>
