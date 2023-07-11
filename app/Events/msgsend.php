@@ -18,7 +18,7 @@ class msgsend implements ShouldBroadcast
  public $pesan;
  public $user;
 
-    public function __construct(Pesan $pesan,User $user)
+    public function __construct($pesan,$user)
     {
         $this->pesan = $pesan;
         $this->user = $user;
@@ -26,10 +26,10 @@ class msgsend implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return new PrivateChannel('chatting');
+        return ('chatting');
     }
-      public function broadcastAs()
+      public function broadcastWith()
   {
-      return 'chatting';
+      return ["pesan"=>$this->pesan];
   }
 }

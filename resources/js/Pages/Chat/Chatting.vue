@@ -17,6 +17,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import Pusher from "pusher-js";
 
+
 const datas = ref([]);
 const pesan = ref("");
 const user = ref([]);
@@ -40,25 +41,18 @@ const getMsg = async () => {
 };
 
 const initializePusher = () => {
-    pusher = new Pusher("c830acc9e6221d6f6967", {
-        cluster: "ap1",
-    });
-
-    const channel = pusher.subscribe("chatting");
-
-    channel.bind("msgsend", (data) => {
-        datas.value.push(data);
-        console.log(data.values)
-    });
-
-    getMsg();
+    window.Echo.private('message-channel')
+        .listen('msgsenf', (e) => {
+            vm.data.values(e.pesan)
+        });
 };
 
 const addMsg = async () => {
     try {
+        let token = document.head.querySelector('meta[name="csrf-token"]');
         const res = await axios.post("/chat", {
             pesan: pesan.value,
-        });
+        }, { 'X-CSRF-TOKEN': token });
         pesan.value = "";
         getMsg() // Clear the input field
     } catch (error) {

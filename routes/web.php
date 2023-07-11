@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ChatController;
+use App\Http\Controllers\CounterController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -39,5 +40,8 @@ Route::get("/chatting",[ChatController::class,"index"])->name('chat.view');
 Route::get("/chat",[ChatController::class,"getMsg"])->name('chatting.view');
 Route::post("/chat",[ChatController::class,"sendPesan"])->name('chat.post');
 Route::get("/user",[ChatController::class,"getUserLogin"]);
+Route::get("/kuru",[CounterController::class,"index"]);
+
+
 
 require __DIR__.'/auth.php';
