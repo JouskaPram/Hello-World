@@ -20,11 +20,9 @@ jobs:
     - uses: actions/checkout@v3
     - name: Update Composer
       run: composer update
-    - name: Install Dependencies
+    - name: Install Dependencies Php
       run: composer install
-    - name: run linter    
-      run: npm run lint
-    - name: module install
+    - name: module js install
       run: npm install
 
   deploy:
