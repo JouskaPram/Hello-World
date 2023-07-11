@@ -22,7 +22,8 @@ jobs:
       run: composer update
     - name: Install Dependencies
       run: composer install
-    
+    - name: run linter    
+      run: npm run lint
     - name: module install
       run: npm install
 
@@ -43,5 +44,6 @@ jobs:
           script: |
             cd /var/www/html/laravel/hello-world
             php artisan key:generate
+            php artisan migrate
             git pull origin pram
             npm run build

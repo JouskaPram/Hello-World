@@ -59,11 +59,17 @@ const addMsg = async () => {
         const res = await axios.post("/chat", {
             pesan: pesan.value,
         });
-        pesan.value = ""; // Clear the input field
+        pesan.value = "";
+        getMsg() // Clear the input field
     } catch (error) {
         console.error("Error adding message:", error);
     }
 };
+const getUser = async () => {
+    const res = await axios.get("/user")
+    // console.log(res.data)
+    user.value = res.data;
+}
 </script>
 
 <style lang="scss" scoped></style>
