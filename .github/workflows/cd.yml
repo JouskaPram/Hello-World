@@ -9,9 +9,27 @@ on:
       - pram
 
 jobs:
-  deploy:
+
+  ci:
     runs-on: ubuntu-latest
 
+    steps:
+    - uses: shivammathur/setup-php@15c43e89cdef867065b0213be354c2841860869e
+      with:
+        php-version: '8.1'
+    - uses: actions/checkout@v3
+    - name: Update Composer
+      run: composer update
+    - name: Install Dependencies
+      run: composer install
+    - name: Generate key
+      run: php artisan key:generate
+    - name: module install
+      run: npm install
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: ci
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
