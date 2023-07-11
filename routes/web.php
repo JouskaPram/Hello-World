@@ -35,8 +35,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::get("/chatpage",[ChatController::class,"index"])->name('chatting.view');
-Route::get("/chat",[ChatController::class,"getMsg"])->name('chat.view');
+Route::get("/chatting",[ChatController::class,"index"])->name('chat.view');
+Route::get("/chat",[ChatController::class,"getMsg"])->name('chatting.view');
 Route::post("/chat",[ChatController::class,"sendPesan"])->name('chat.post');
 Route::get("/user",[ChatController::class,"getUserLogin"]);
 

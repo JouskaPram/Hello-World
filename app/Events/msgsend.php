@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Models\Pesan;
+use App\Models\User;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -10,27 +12,24 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class msgsend
+class msgsend implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+ public $pesan;
+ public $user;
 
-    /**
-     * Create a new event instance.
-     */
-    public function __construct()
+    public function __construct(Pesan $pesan,User $user)
     {
-        //
+        $this->pesan = $pesan;
+        $this->user = $user;
     }
 
-    /**
-     * Get the channels the event should broadcast on.
-     *
-     * @return array<int, \Illuminate\Broadcasting\Channel>
-     */
-    public function broadcastOn(): array
+    public function broadcastOn()
     {
-        return [
-            new PrivateChannel('chat'),
-        ];
+        return new PrivateChannel('chatting');
     }
+      public function broadcastAs()
+  {
+      return 'chatting';
+  }
 }

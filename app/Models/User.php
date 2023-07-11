@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-        public function pesans()
+        public function pesan()
 {
   return $this->hasMany(Pesan::class);
 }

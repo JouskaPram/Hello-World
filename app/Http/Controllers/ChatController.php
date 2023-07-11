@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\msgsend;
 use App\Models\Pesan;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -23,13 +25,15 @@ class ChatController extends Controller
     }
      public function sendPesan(Request $request)
     {
-    $user = Auth::user()->getAuthIdentifier();
-      $pesan = Pesan::create([
-           "user_id"=>$user,
-        "pesan"=>request("pesan"),
-      ]);
-      return redirect()->back();
-      
+    $id = Auth::user()->getAuthIdentifier();
+    $user = Auth::user();
+
+    $pesan = $user->pesan()->create([
+        "user_id" => $id,
+        "pesan" => $request->input("pesan"),
+    ]);
+
+    event(new msgsend($pesan,$user));
 
 }
 }
