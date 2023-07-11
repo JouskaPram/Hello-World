@@ -22,8 +22,7 @@ jobs:
       run: composer update
     - name: Install Dependencies
       run: composer install
-    - name: Generate key
-      run: php artisan key:generate
+    
     - name: module install
       run: npm install
 
@@ -43,5 +42,6 @@ jobs:
           port: 22
           script: |
             cd /var/www/html/laravel/hello-world
+            php artisan key:generate
             git pull origin pram
             npm run build
