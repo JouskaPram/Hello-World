@@ -64,12 +64,21 @@ return [
 
         'redis' => [
             'driver' => 'redis',
-            'connection' => 'default',
+            'connection' => 'queue',
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 90,
             'block_for' => null,
             'after_commit' => false,
-        ],
+        ],,'redis2' => [
+            // hard coded 'redis' driver specified in config/database.php
+            'driver' => 'redis',
+            // hard coded newly added 'queue' connection from 'redis' driver connection in config/database.php
+            'connection' => 'queue2',
+            // this specifies the default key prefix for this 'redis2' connecton that is used for the queue keys
+            'queue' => env('REDIS_QUEUE', 'default'),
+            'retry_after' => 90,
+            'block_for' => null,
+        ]
 
     ],
 
