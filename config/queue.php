@@ -63,15 +63,15 @@ return [
         ],
 
         'redis' => [
-               client' => env('REDIS_CLIENT', 'phpredis2'),
-
+               
+            'client' => env('REDIS_CLIENT', 'phpredis2'),
             'driver' => 'redis',
             'connection' => 'queue',
             'queue' => env('REDIS_QUEUE', 'default'),
             'retry_after' => 90,
             'block_for' => null,
             'after_commit' => false,
-        ],,'redis2' => [
+        ],'redis2' => [
             // hard coded 'redis' driver specified in config/database.php
             'driver' => 'redis',
             // hard coded newly added 'queue' connection from 'redis' driver connection in config/database.php
