@@ -63,6 +63,8 @@ return [
         ],
 
         'redis' => [
+               client' => env('REDIS_CLIENT', 'phpredis2'),
+
             'driver' => 'redis',
             'connection' => 'queue',
             'queue' => env('REDIS_QUEUE', 'default'),
