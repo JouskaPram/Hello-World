@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\CounterJobs;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,19 +14,18 @@ class CounterController extends Controller
       
         return Inertia::render('Post/Index');
     }
-      public function getCounter()
-    {
-        $counter = Post::get("count");
-        return $counter;
-        return response()->json(['counter' => $counter->count]);
-    }
+  public function getCounter()
+{
+    $counter = Post::select("count")->first();
 
-    public function incrementCounter()
-    {
-        $counter = Post::firstOrCreate([]);
-        $counter->increment('count');
-        return response()->json(['counter' => $counter->count]);
-    }
+    return response()->json(['counter' => $counter->count]);
+}
+
+   public function incrementCounter()
+{
+    CounterJobs::dispatch();
+}
+
     /**
      * Display a listing of the resource.
      */

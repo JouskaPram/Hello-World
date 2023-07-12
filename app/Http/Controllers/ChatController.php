@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Events\msgsend;
+use App\Jobs\processPesan;
 use App\Models\Pesan;
 
 use Illuminate\Http\Request;
@@ -25,15 +26,11 @@ class ChatController extends Controller
     }
      public function sendPesan(Request $request)
     {
-    $id = Auth::user()->getAuthIdentifier();
-    $user = Auth::user();
+    processPesan::dispatch();
 
-    $pesan = $user->pesan()->create([
-        "user_id" => $id,
-        "pesan" => $request->input("pesan"),
-    ]);
-
-    event(new msgsend($pesan,$user));
 
 }
+    public function destroy(){
+                Pesan::all()->delete();
+            }
 }

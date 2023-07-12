@@ -2,8 +2,10 @@
 
 namespace App\Console;
 
+use App\Models\Pesan;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\DB;
 
 class Kernel extends ConsoleKernel
 {
@@ -13,7 +15,9 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule): void
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('schedule:run')->debug();
+           $schedule->call(function () {
+            DB::table('pesans')->delete();
+        })->everyMinute();
 
     }
 

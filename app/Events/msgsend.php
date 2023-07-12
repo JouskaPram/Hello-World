@@ -11,6 +11,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use PhpParser\Node\Expr\Print_;
 
 class msgsend implements ShouldBroadcast
 {
@@ -26,10 +27,11 @@ class msgsend implements ShouldBroadcast
 
     public function broadcastOn()
     {
-        return ('chatting');
+        return new PrivateChannel('chatting');
     }
       public function broadcastWith()
   {
       return ["pesan"=>$this->pesan];
+      dd($this->pesan);
   }
 }

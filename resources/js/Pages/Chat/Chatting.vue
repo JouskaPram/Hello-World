@@ -28,6 +28,7 @@ onMounted(() => {
     initializePusher();
     getUser();
     getMsg();
+    autoMsg()
 });
 
 const getMsg = async () => {
@@ -39,10 +40,15 @@ const getMsg = async () => {
         console.error("Error fetching messages:", error);
     }
 };
+const autoMsg = () => {
+    setInterval(() => {
+        getMsg()
+    }, 10000);
+}
 
 const initializePusher = () => {
-    window.Echo.private('message-channel')
-        .listen('msgsenf', (e) => {
+    window.Echo.private('chatting')
+        .listen('msgsend', (e) => {
             vm.data.values(e.pesan)
         });
 };

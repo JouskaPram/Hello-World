@@ -42,6 +42,6 @@ Route::post("/chat",[ChatController::class,"sendPesan"])->name('chat.post');
 Route::get("/user",[ChatController::class,"getUserLogin"]);
 Route::get("/kuru",[CounterController::class,"index"]);
 
-
+Route::delete("/delete",[ChatController::class,"destroy"]);
 
 require __DIR__.'/auth.php';
