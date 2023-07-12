@@ -43,5 +43,6 @@ Route::get("/user",[ChatController::class,"getUserLogin"]);
 Route::get("/kuru",[CounterController::class,"index"]);
 
 Route::delete("/delete",[ChatController::class,"destroy"]);
-
+Route::get("/increment",[CounterController::class,"getCounter"]);
+Route::post("/counter",[CounterController::class,"incrementCounter"]);
 require __DIR__.'/auth.php';

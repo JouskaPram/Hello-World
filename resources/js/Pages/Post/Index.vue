@@ -1,7 +1,7 @@
 <template>
     <div>
         <h1 class="animated" :class="{ 'bounce': animate }">Counter: {{ counter }}</h1>
-        <button @click="incrementCounter">Increment</button>
+        <button @click="updateCounterOnServer">Increment</button>
     </div>
 </template>
 
@@ -11,34 +11,27 @@ import { onBeforeUnmount } from 'vue';
 import { ref } from 'vue';
 import { onMounted } from 'vue';
 
-const counter = ref(0);
+const counter = ref();
 let intervalId;
 const getCounter = async () => {
     try {
         const response = await axios.get('/api/increment');
-        counter.value = response.data.counter;
-        console.log(response.data.counter)
+        counter.value = response.data;
+
     } catch (error) {
         console.error(error);
     }
 };
 
-const incrementCounter = () => {
-    const incrementValue = 1; // Ubah nilai sesuai kebutuhan
-    counter.value += incrementValue;
-    updateCounterOnServer(incrementValue);
-};
 
-const updateCounterOnServer = (incrementValue) => {
+
+const updateCounterOnServer = () => {
     axios.post('/api/counter', {
-        count: incrementValue,
+        "count": 1
     })
-        .then((response) => {
-            console.log(response);
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    getCounter();
+
+
 };
 
 const startDataFetching = () => {

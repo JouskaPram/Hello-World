@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Post extends Model
 {
-    protected $fillable = ["count"];
+    protected $fillable = ["id","count","updated_at","created_at"];
     use HasFactory;
 }

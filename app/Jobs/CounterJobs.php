@@ -16,10 +16,10 @@ class CounterJobs implements ShouldQueue
 
     /**
      * Create a new job instance.
-     */
-    public function __construct()
+     */  private int $count;
+    public function __construct(int $count)
     {
-        //
+            $this->count = $count;
     }
 
     /**
@@ -27,11 +27,9 @@ class CounterJobs implements ShouldQueue
      */
     public function handle(): void
     {
-          $incrementValue = request('count', 0); // Mendapatkan nilai yang dikirim dari Vue component
-    $counter = Post::firstOrNew([]); // Mendapatkan record counter atau membuat baru jika belum ada
-
-    $counter->count += $incrementValue; // Menambahkan angka yang dikirim ke angka yang ada
-    $counter->save(); // Menyimpan perubahan
+    
+        Post::create(['count' => $this->count]);
+     
 
     }
 }
