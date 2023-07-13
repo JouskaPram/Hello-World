@@ -1,37 +1,26 @@
 <?php
-
 namespace App\Events;
 
-use App\Models\Pesan;
-use App\Models\User;
 use Illuminate\Broadcasting\Channel;
-use Illuminate\Broadcasting\InteractsWithSockets;
-use Illuminate\Broadcasting\PresenceChannel;
-use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
-use Illuminate\Foundation\Events\Dispatchable;
-use Illuminate\Queue\SerializesModels;
-use PhpParser\Node\Expr\Print_;
 
 class msgsend implements ShouldBroadcast
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
- public $pesan;
- public $user;
+    public $count;
 
-    public function __construct($pesan,$user)
+    public function __construct($count)
     {
-        $this->pesan = $pesan;
-        $this->user = $user;
+        $this->count = $count;
     }
 
     public function broadcastOn()
     {
-        return new PrivateChannel('chatting');
+        return new Channel('counter-channel');
     }
-      public function broadcastWith()
-  {
-      return ["pesan"=>$this->pesan];
-      dd($this->pesan);
-  }
+
+    public function broadcastAs()
+    {
+        return 'counter-updated';
+    }
 }
+

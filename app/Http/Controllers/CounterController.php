@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Jobs\CounterJobs;
 use App\Models\Post;
-use Countable;
+
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Events\IncrementCounterEvent;
+use App\Events\msgsend;
 
 class CounterController extends Controller
 {
@@ -17,18 +19,23 @@ class CounterController extends Controller
     }
   public function getCounter()
 {
-    $counter = Post::get("*");
-    $count = count($counter);
-    return $count;
+      $post = Post::find(1); // Ganti 1 dengan ID post yang sesuai
+
+    return response()->json(['count' => $post->count], 200);
 
     // return response()->json(['counter' => $counter]);
 }
 
    public function incrementCounter()
 {
-    // Mendapatkan record counter atau membuat baru jika belum ada
-   CounterJobs::dispatch(request('count'));
-    return response()->json(['message' => 'Data sent to queue']);
+    $post = Post::find(1); // Ganti 1 dengan ID post yang sesuai
+    $updatedCounter = $post->count + 1;
+    $post->count = $updatedCounter;
+    $post->save();
+    $count = 10;
+    // Mengirimkan pembaruan nilai counter ke Pusher
+    event(new msgsend($count));
+      return response()->json(['message' => 'Counter incremented'], 200);
 }
 
     /**

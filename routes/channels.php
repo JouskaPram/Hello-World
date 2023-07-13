@@ -11,3 +11,6 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('chatting', function ($user) {
    return true;
 });
+Broadcast::channel('counter-channel', function ($user) {
+   return true;
+});

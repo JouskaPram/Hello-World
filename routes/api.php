@@ -19,6 +19,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-  Route::get("/increment",[CounterController::class,"getCounter"]);
-Route::post("/counter",[CounterController::class,"incrementCounter"]);
+Route::get("/counter",[CounterController::class,"getCounter"]);
+Route::post("/increment",[CounterController::class,"incrementCounter"]);
 

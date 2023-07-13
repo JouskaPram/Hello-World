@@ -5,76 +5,66 @@
     </div>
 </template>
 
-<script setup>
-import axios from 'axios';
-import { onBeforeUnmount } from 'vue';
-import { ref } from 'vue';
-import { onMounted } from 'vue';
+<script>
+import { ref, onMounted } from 'vue';
+import Pusher from 'pusher-js';
+import Echo from 'laravel-echo';
+export default {
+    setup() {
+        const counter = ref(0);
+        let animate = false;
+        const pusherChannel = ref(null)
+        const setupPusher = () => {
+            const pusher = new Pusher('c830acc9e6221d6f6967', {
+                cluster: 'ap1',
+                encrypted: true,
+            });
 
-const counter = ref();
-let intervalId;
-const getCounter = async () => {
-    try {
-        const response = await axios.get('/api/increment');
-        counter.value = response.data;
+            pusherChannel.value = pusher.subscribe('counter-channel');
+        };
 
-    } catch (error) {
-        console.error(error);
-    }
+        const setupEcho = () => {
+            pusherChannel.value.bind('msgsend', (data) => {
+                counter.value = data.count;
+            });
+        };
+
+
+
+        const updateCounterOnServer = async () => {
+            try {
+                await axios.post('/api/increment');
+                getCounterFromServer();
+            } catch (error) {
+                console.error(error);
+            }
+        };
+
+        const getCounterFromServer = () => {
+            axios.get('/api/counter')
+                .then((response) => {
+                    console.log(response)
+                    counter.value = response.data.count;
+                    console.log(response.data)
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        };
+
+        onMounted(() => {
+            getCounterFromServer();
+            setupPusher();
+            setupEcho();
+        });
+
+        return {
+            counter,
+            animate,
+            updateCounterOnServer,
+        };
+    },
 };
-
-
-
-const updateCounterOnServer = () => {
-    axios.post('/api/counter', {
-        "count": 1
-    })
-    getCounter();
-
-
-};
-
-const startDataFetching = () => {
-    setInterval(() => {
-        getCounter();
-    }, 5000);
-};
-
-const stopDataFetching = () => {
-    clearInterval(intervalId);
-};
-// onBeforeUnmount(() => {
-//     stopDataFetching();
-// });
-
-
-onMounted(() => {
-    startDataFetching();
-    getCounter();
-
-});
 </script>
 
-<style scoped>
-.animated {
-    transition: 0.5s;
-}
-
-.bounce {
-    animation: bounce 0.5s;
-}
-
-@keyframes bounce {
-    0% {
-        transform: scale(1);
-    }
-
-    50% {
-        transform: scale(1.2);
-    }
-
-    100% {
-        transform: scale(1);
-    }
-}
-</style>
+<style scoped></style>
