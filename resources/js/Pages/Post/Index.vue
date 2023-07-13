@@ -51,7 +51,7 @@ export default {
                 totalClicks.value = 0;
             } catch (error) {
                 console.error(error);
-            }
+            };
         };
 
         const incrementTempCounter = () => {
@@ -64,7 +64,7 @@ export default {
             if (pendingUpdate !== null) {
                 // If there is a pending update, clear it
                 clearTimeout(pendingUpdate);
-            }
+            };
 
             pendingUpdate = setTimeout(updateCounterOnServer, 1500);
 
