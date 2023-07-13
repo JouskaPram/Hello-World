@@ -77,9 +77,7 @@ export default {
                 .then((response) => {
                     counter.value = response.data.count;
                 })
-                .catch((error) => {
-                    console.error(error);
-                });
+
             loading.value = false
         };
 
