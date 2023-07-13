@@ -37,22 +37,21 @@ export default {
 
         const updateCounterOnServer = async () => {
             getCounterFromServer()
-            try {
-                // Send the counter value to the server
-                await axios.post('/api/increment', {
-                    "count": totalClicks.value,
-                }).then((response) => {
-                    console.log(response)
-                });
-                console.log(totalClicks)
 
-                // Reset the temporary counter
-                tempCounter.value = 0;
-                totalClicks.value = 0;
-            } catch (error) {
-                console.error(error);
-            };
+            // Send the counter value to the server
+            await axios.post('/api/increment', {
+                "count": totalClicks.value,
+            }).then((response) => {
+                console.log(response)
+            });
+            console.log(totalClicks)
+
+            // Reset the temporary counter
+            tempCounter.value = 0;
+            totalClicks.value = 0;
+
         };
+
 
         const incrementTempCounter = () => {
             animate.value = true;
