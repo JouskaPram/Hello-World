@@ -36,7 +36,7 @@ export default {
 
 
         const updateCounterOnServer = async () => {
-            getCounterFromServer()
+            // getCounterFromServer()
 
             // Send the counter value to the server
             await axios.post('/api/increment', {
@@ -49,6 +49,7 @@ export default {
             // Reset the temporary counter
             tempCounter.value = 0;
             totalClicks.value = 0;
+
 
         };
 
@@ -65,7 +66,8 @@ export default {
                 clearTimeout(pendingUpdate);
             };
 
-            pendingUpdate = setTimeout(updateCounterOnServer, 1500);
+            pendingUpdate = setTimeout(updateCounterOnServer, 5000);
+            animate.value = false;
 
         };
 
