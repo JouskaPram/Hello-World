@@ -28,13 +28,14 @@ class CounterController extends Controller
 
    public function incrementCounter()
 {
-    $post = Post::find(1); // Ganti 1 dengan ID post yang sesuai
-    $updatedCounter = $post->count + 1;
-    $post->count = $updatedCounter;
-    $post->save();
-    $count = 10;
-    // Mengirimkan pembaruan nilai counter ke Pusher
-    event(new msgsend($count));
+     
+    
+    
+      $post = Post::find(1); // Ganti 1 dengan ID post yang sesuai
+    $updatedCounter =request("count");
+    $post->count =  $post->count + $updatedCounter;
+    $post->save(); 
+//    CounterJobs::dispatch()->onQueue('CounterJobs');;
       return response()->json(['message' => 'Counter incremented'], 200);
 }
 

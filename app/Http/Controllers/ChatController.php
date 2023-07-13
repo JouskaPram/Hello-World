@@ -26,7 +26,15 @@ class ChatController extends Controller
     }
      public function sendPesan(Request $request)
     {
-    processPesan::dispatch();
+  $id = Auth::user()->getAuthIdentifier();
+    $user = Auth::user();
+
+    $pesan = $user->pesan()->create([
+        "user_id" => $id,
+        "pesan" => $request->input("pesan"),
+    ]);
+
+    // event(new msgsend($pesan));
 
 
 }

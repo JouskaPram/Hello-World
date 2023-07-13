@@ -16,10 +16,10 @@ class CounterJobs implements ShouldQueue
 
     /**
      * Create a new job instance.
-     */  private int $count;
-    public function __construct(int $count)
+     */ 
+    public function __construct()
     {
-            $this->count = $count;
+           
     }
 
     /**
@@ -28,7 +28,6 @@ class CounterJobs implements ShouldQueue
     public function handle(): void
     {
     
-        Post::create(['count' => $this->count]);
      
 
     }

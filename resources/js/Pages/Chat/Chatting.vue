@@ -17,7 +17,7 @@ import axios from "axios";
 import { ref, onMounted } from "vue";
 import Pusher from "pusher-js";
 
-
+Pusher.logToConsole = true;
 const datas = ref([]);
 const pesan = ref("");
 const user = ref([]);
@@ -28,7 +28,7 @@ onMounted(() => {
     initializePusher();
     getUser();
     getMsg();
-    autoMsg()
+
 });
 
 const getMsg = async () => {
@@ -40,31 +40,29 @@ const getMsg = async () => {
         console.error("Error fetching messages:", error);
     }
 };
-const autoMsg = () => {
-    setInterval(() => {
-        getMsg()
-    }, 10000);
-}
 
-const initializePusher = () => {
-    window.Echo.private('chatting')
-        .listen('msgsend', (e) => {
-            vm.data.values(e.pesan)
-        });
-};
 
+// const initializePusher = () => {
+//     pusher = new Pusher("c830acc9e6221d6f6967", {
+//         cluster: "ap1",
+//     });
+//     const channel = pusher.subscribe("chatting");
+//     channel.bind("sendmsg", (data) => {
+//         console.log(data)
+//         datas.value.push(data);
+//     });
+// }
 const addMsg = async () => {
     try {
-        let token = document.head.querySelector('meta[name="csrf-token"]');
         const res = await axios.post("/chat", {
             pesan: pesan.value,
-        }, { 'X-CSRF-TOKEN': token });
-        pesan.value = "";
-        getMsg() // Clear the input field
+        });
+        pesan.value = ""; // Clear the input field
+
     } catch (error) {
         console.error("Error adding message:", error);
     }
-};
+}
 const getUser = async () => {
     const res = await axios.get("/user")
     // console.log(res.data)

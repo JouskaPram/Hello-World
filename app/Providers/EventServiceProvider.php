@@ -21,9 +21,7 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
-        msgsend::class => [
-        IncrementCounterListener::class,
-    ],
+      
     ];
 
     /**
