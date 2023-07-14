@@ -1,14 +1,14 @@
 <template>
-    <div class="w-full h-screen pb-5 md:pb-0 bg-[#9d88d3] ">
+    <div class="image-container -z-[1]" v-for="image in images" :key="image.id">
+
+        <transition name="slide-in" mode="out-in">
+            <img v-if="show" :src="image.url" class="slide-in-image ">
+        </transition>
+    </div>
+    <div class="w-full h-screen pb-5 md:pb-0 ">
 
 
         <div class=" items-center px-16 pram h-[100vh]">
-            <div class="image-container" v-for="image in images" :key="image.id">
-
-                <transition name="slide-in" mode="out-in">
-                    <img v-if="show" :src="image.url" class="slide-in-image ">
-                </transition>
-            </div>
 
 
             <div class="relative flex py-5 items-center">
@@ -18,7 +18,8 @@
             </div>
             <h2 class="text-center text-white ">The Website Just For Fun</h2>
 
-            <div class="flex h-[60vh] w-full align-middle items-center justify-center">
+            <audio ref="audioPlayer" :src="audioUrl"></audio>
+            <div class="flex h-[60vh] w-full align-middle items-center justify-center z-10">
 
                 <div class="align-middle items-center justify-center">
 
@@ -48,18 +49,23 @@
 
 <script>
 import { ref, onMounted } from 'vue';
-
+import sound from '@/Pages/Post/kuru.mp3';
 export default {
     setup() {
+
         const counter = ref(0);
         const show = ref(false);
-        const sound = ref()
+
         const images = ref([]);
 
+
         const incrementCounter = () => {
+            const audio = new Audio(sound);
+            audio.play();
 
             counter.value += 1;
             show.value = true;
+
             localStorage.setItem('counter', counter.value.toString());
             const newImage = {
                 id: Math.random(),
@@ -67,6 +73,9 @@ export default {
             };
             images.value.push(newImage);
             console.log(images)
+            setTimeout(() => {
+                show.value = false
+            }, 100)
         };
 
 
@@ -106,14 +115,13 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+    background-color: #9d88d3;
 }
 
 .container {
     min-height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
 }
 
 .wave-svg {
@@ -127,7 +135,12 @@ body {
 
 
 .image-container {
-    position: relative;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
 }
 
 .image-container img {
@@ -135,7 +148,6 @@ body {
     top: 0;
     right: 0;
     transition: transform 0.5s linear;
-
 }
 
 @keyframes slide-in {
@@ -144,7 +156,7 @@ body {
     }
 
     100% {
-        transform: translateX(-250%);
+        transform: translateX(-270%);
     }
 }
 

@@ -24,6 +24,7 @@
         "@inertiajs/inertia-vue3": "^0.6.0",
         "eslint": "^8.44.0",
         "vue-cookies": "^1.8.3",
-        "vue-router": "^4.0.13"
+        "vue-router": "^4.0.13",
+        "vue-use-sound": "^1.1.1"
     }
 }
