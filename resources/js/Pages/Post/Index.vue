@@ -86,7 +86,7 @@ export default {
             counter,
             show,
             incrementCounter,
-            images
+            images,
 
         };
     },

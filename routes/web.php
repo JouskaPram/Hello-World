@@ -18,14 +18,14 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -40,7 +40,7 @@ Route::get("/chatting",[ChatController::class,"index"])->name('chat.view');
 Route::get("/chat",[ChatController::class,"getMsg"])->name('chatting.view');
 Route::post("/chat",[ChatController::class,"sendPesan"])->name('chat.post');
 Route::get("/user",[ChatController::class,"getUserLogin"]);
-Route::get("/kuru",[CounterController::class,"index"]);
+Route::get("/",[CounterController::class,"index"]);
 
 Route::delete("/delete",[ChatController::class,"destroy"]);
 
