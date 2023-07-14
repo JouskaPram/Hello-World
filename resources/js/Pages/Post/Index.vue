@@ -150,6 +150,7 @@ body {
     top: 0;
     right: 0;
     transition: transform 0.5s linear;
+    transform: translateX(0%);
 }
 
 @keyframes slide-in {
