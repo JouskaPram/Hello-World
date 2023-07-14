@@ -3,10 +3,10 @@
 
 
         <div class=" items-center px-16 pram h-[100vh]">
-            <div class="image-container">
+            <div class="image-container" v-for="image in images" :key="image.id">
 
                 <transition name="slide-in" mode="out-in">
-                    <img v-if="show" src="https://herta.eu.org/img/hertaa2.webp" class="slide-in-image ">
+                    <img v-if="show" :src="image.url" class="slide-in-image ">
                 </transition>
             </div>
 
@@ -53,27 +53,29 @@ export default {
     setup() {
         const counter = ref(0);
         const show = ref(false);
-        const images = ref([
-            'https://herta.eu.org/img/hertaa2.webp',
-            'https://herta.eu.org/img/hertaa1.webp'
-        ]);
+
+        const images = ref([]);
 
         const incrementCounter = () => {
-            show.value = true;
+
             counter.value += 1;
+            show.value = true;
             localStorage.setItem('counter', counter.value.toString());
-            setTimeout(() => {
-                show.value = false;
-            }, 1000);
+            const newImage = {
+                id: Math.random(),
+                url: 'https://herta.eu.org/img/hertaa2.webp'
+            };
+            images.value.push(newImage);
+            console.log(images)
         };
+
+
 
         const getCounterFromStorage = () => {
             const savedCounter = localStorage.getItem('counter');
             if (savedCounter !== null) {
                 counter.value = parseInt(savedCounter);
             }
-
-
         };
 
         onMounted(() => {
@@ -83,10 +85,11 @@ export default {
         return {
             counter,
             show,
-            images,
-            incrementCounter
+            incrementCounter,
+            images
+
         };
-    }
+    },
 };
 </script>
 
