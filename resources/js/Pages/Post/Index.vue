@@ -51,6 +51,7 @@
 <script>
 import { ref, onMounted } from 'vue';
 import sound from '@/Pages/Post/kuru.mp3';
+import kuru from '@/Pages/Post/hertaa2.webp'
 export default {
     setup() {
 
@@ -70,7 +71,7 @@ export default {
             localStorage.setItem('counter', counter.value.toString());
             const newImage = {
                 id: Math.random(),
-                url: 'https://herta.eu.org/img/hertaa2.webp'
+                url: kuru
             };
             images.value.push(newImage);
             console.log(images)
