@@ -1,10 +1,4 @@
 <template>
-    <div class="image-container -z-[1]" v-for="image in images" :key="image.id">
-
-        <transition name="slide-in" mode="out-in">
-            <img v-if="show" :src="image.url" class="slide-in-image ">
-        </transition>
-    </div>
     <div class="w-full h-screen pb-5 md:pb-0 ">
 
 
@@ -43,7 +37,14 @@
                 <span class="flex-shrink mx-4 text-white md:text-3xl text-xl">Got Your Kuru Kuru</span>
                 <div class="flex-grow border-t border-white"></div>
             </div>
+            <p class="text-center text-white text-md ">It Will Change Character In Every 24 Hours</p>
         </div>
+    </div>
+    <div class="image-container -z-[1]" v-for="image in images" :key="image.id">
+
+        <transition name="slide-in" mode="out-in">
+            <img v-if="show" :src="image.url" class="slide-in-image ">
+        </transition>
     </div>
 </template>
 
