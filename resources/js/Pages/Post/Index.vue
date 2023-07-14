@@ -2,7 +2,7 @@
     <div class="w-full h-screen pb-5 md:pb-0 ">
 
 
-        <div class=" items-center px-16 pram h-[100vh]">
+        <div class="  px-16 pram h-[100vh]">
 
 
             <div class="relative flex md:py-5 py-2 items-center">
@@ -32,15 +32,11 @@
                 </div>
             </div>
 
-            <div class="relative flex md:py-5 py-2  items-center">
-                <div class="flex-grow border-t border-white"></div>
-                <span class="flex-shrink mx-4 text-white md:text-3xl text-xl">Got Your Kuru Kuru</span>
-                <div class="flex-grow border-t border-white"></div>
-            </div>
+
             <p class="text-center text-white text-md ">It Will Change Character In Every 24 Hours</p>
         </div>
     </div>
-    <div class="image-container -z-[1]" v-for="image in images" :key="image.id">
+    <div class="image-container -z-[1] pt-40 md:pt-0" v-for="image in images" :key="image.id">
 
         <transition name="slide-in" mode="out-in">
             <img v-if="show" :src="image.url" class="slide-in-image ">
@@ -120,10 +116,6 @@ body {
     background-color: #9d88d3;
 }
 
-.container {
-    min-height: 100vh;
-
-}
 
 .wave-svg {
     position: fixed;
@@ -146,7 +138,7 @@ body {
 
 .image-container img {
     position: absolute;
-    /* top: 0; */
+    bottom: 10;
     right: 0;
     transition: transform 0.5s linear;
     transform: translateX(0%);
