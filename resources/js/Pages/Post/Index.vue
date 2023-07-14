@@ -53,7 +53,7 @@ export default {
     setup() {
         const counter = ref(0);
         const show = ref(false);
-
+        const sound = ref()
         const images = ref([]);
 
         const incrementCounter = () => {
