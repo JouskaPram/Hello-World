@@ -5,7 +5,7 @@
         <div class=" items-center px-16 pram h-[100vh]">
 
 
-            <div class="relative flex py-5 items-center">
+            <div class="relative flex md:py-5 py-2 items-center">
                 <div class="flex-grow border-t border-white"></div>
                 <span class="flex-shrink mx-4 text-white md:text-3xl text-xl">Got Your Kuru Kuru</span>
                 <div class="flex-grow border-t border-white"></div>
@@ -13,7 +13,7 @@
             <h2 class="text-center text-white ">The Website Just For Fun</h2>
 
             <audio ref="audioPlayer" :src="audioUrl"></audio>
-            <div class="flex h-[60vh] w-full align-middle items-center justify-center z-10">
+            <div class="flex h-[70vh] w-full align-middle items-center justify-center z-10">
 
                 <div class="align-middle items-center justify-center">
 
@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="relative flex py-5 items-center">
+            <div class="relative flex md:py-5 py-2  items-center">
                 <div class="flex-grow border-t border-white"></div>
                 <span class="flex-shrink mx-4 text-white md:text-3xl text-xl">Got Your Kuru Kuru</span>
                 <div class="flex-grow border-t border-white"></div>
@@ -122,7 +122,6 @@ body {
 
 .container {
     min-height: 100vh;
-    display: flex;
 
 }
 
@@ -147,7 +146,7 @@ body {
 
 .image-container img {
     position: absolute;
-    top: 0;
+    /* top: 0; */
     right: 0;
     transition: transform 0.5s linear;
     transform: translateX(0%);

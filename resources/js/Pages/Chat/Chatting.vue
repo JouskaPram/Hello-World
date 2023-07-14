@@ -31,27 +31,22 @@ onMounted(() => {
 
 });
 
-const getMsg = async () => {
-    try {
-        const res = await axios.get("/chat");
-        datas.value = res.data;
-        console.log(res.data)
-    } catch (error) {
-        console.error("Error fetching messages:", error);
-    }
-};
 
 
-// const initializePusher = () => {
-//     pusher = new Pusher("c830acc9e6221d6f6967", {
-//         cluster: "ap1",
-//     });
-//     const channel = pusher.subscribe("chatting");
-//     channel.bind("sendmsg", (data) => {
-//         console.log(data)
-//         datas.value.push(data);
-//     });
-// }
+const initializePusher = () => {
+    pusher = new Pusher("c830acc9e6221d6f6967", {
+        cluster: "ap1",
+    });
+    const channel = pusher.subscribe("chat");
+    channel.bind("MessageSent", (data) => {
+        console.log(data)
+        datas.value.push(data);
+    });
+}
+Echo.private("chat").listen("MessageSent", (e) => {
+    console.log(e)
+    datas.value.push(data);
+});
 const addMsg = async () => {
     try {
         const res = await axios.post("/chat", {
